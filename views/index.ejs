@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/css/style.css'/>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="/js/script.js"></script>
+    <title>Joint drawing</title>
+</head>
+<body>
+<div class="d-flex flex-row justify-content-between">
+    <div class="block">
+        <canvas id="canvas">The browser does not support this technology!</canvas>
+    </div>
+    <div class="block">
+        <h1>Draw Board</h1>
+        <br>
+        <label for="radius">Brush size</label>
+        <input class="form-control" type="number" id="radius" value="10">
+        <br>
+        <label for="color">Brush color</label>
+        <input class="form-control" type="color" id="color">
+        <br>
+        <button class="btn btn-danger right" id="clear">Clear</button>
+        <button class="btn btn-danger right">Save</button>
+    </div>
+</div>
+</body>
+</html>
