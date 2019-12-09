@@ -2,9 +2,10 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+const path = require('path');
 
 app.use(express.static(__dirname + '/public'));
-let port = 3000;
+let port = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 
 http.listen(port, function () {
