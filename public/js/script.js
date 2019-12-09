@@ -2,7 +2,7 @@ $(document).ready(function () {
     let canvas = $('#canvas').get(0);
     let ctx = canvas.getContext('2d');
     let drawing = false;
-    let brush_color = 'black';
+    let brush_color = '#000000';
     let radius = 10;
     let socket = io.connect();
 
@@ -41,8 +41,8 @@ $(document).ready(function () {
     });
 
     $('#brush_color').change(function () {
-        change_brush_color(this.value);
         socket.emit('change_brush_color', this.value);
+        change_brush_color(this.value);
     });
 
     socket.on('connect', function () {
@@ -52,7 +52,7 @@ $(document).ready(function () {
     socket.on('join', function () {
         alert('New user connected! Brush color and size set to default!');
 
-        socket.emit('change_brush_color', 'black');
+        socket.emit('change_brush_color', '#000000');
         socket.emit('change_radius', 10);
     });
 
@@ -66,10 +66,13 @@ $(document).ready(function () {
 
     socket.on('change_radius', function (data) {
         change_radius(data);
+        $('#radius').val(radius);
+
     });
 
     socket.on('change_brush_color', function (data) {
         change_brush_color(data);
+        // $('#brush_color').val(data);
     });
 
     socket.on('mouse_up', function () {
@@ -92,7 +95,7 @@ $(document).ready(function () {
     }
 
     function clear() {
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         ctx.beginPath();
@@ -102,13 +105,11 @@ $(document).ready(function () {
     function change_radius(data) {
         radius = data;
         ctx.lineWidth = radius * 2;
-        $('#radius').val(radius);
     }
 
     function change_brush_color(data) {
         brush_color = data;
         ctx.fillStyle = brush_color;
         ctx.strokeStyle = brush_color;
-        $('#brush_color').val(brush_color);
     }
 });
