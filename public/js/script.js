@@ -19,14 +19,17 @@ $(document).ready(function () {
     });
 
     canvas.addEventListener('mousemove', function (e) {
+        const x = e.clientX - 20;
+        const y = e.clientY - 20;
+
         if (drawing) {
             socket.emit('draw', {
-                x: e.clientX,
-                y: e.clientY,
+                x: x,
+                y: y,
                 brush_color: brush_color,
                 rad: radius
             });
-            draw(ctx, e.clientX, e.clientY, brush_color, radius);
+            draw(ctx, x, y, brush_color, radius);
         }
     });
 
@@ -53,7 +56,7 @@ $(document).ready(function () {
         $('#radius').val(radius);
         $('#brush_color').val(brush_color);
 
-        console.log('User connected!');
+        socket.emit('message', 'User connected!');
     });
 
     socket.on('draw', function (data) {
@@ -67,6 +70,18 @@ $(document).ready(function () {
     socket.on('mouse_up', function () {
         drawing = false;
         ctx.beginPath();
+    });
+
+    socket.on('mouse_down', function () {
+        drawing = true;
+    });
+
+    socket.on('message', function (data) {
+        console.log(data);
+    });
+
+    socket.on('disconnect', function () {
+        socket.emit('message', 'User disconnected!')
     });
 
     function draw(ctx, x, y, color, rad) {

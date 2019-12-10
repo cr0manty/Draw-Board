@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-const path = require('path');
 
 app.use(express.static(__dirname + '/public'));
 let port = process.env.PORT || 3000;
@@ -25,8 +24,16 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('clear');
     });
 
-     socket.on('mouse_up', function () {
+    socket.on('mouse_up', function () {
         socket.broadcast.emit('mouse_up');
+    });
+
+    socket.on('mouse_down', function () {
+        socket.broadcast.emit('mouse_down');
+    });
+
+    socket.on('message', function (data) {
+        socket.broadcast.emit('message', data);
     });
 });
 
