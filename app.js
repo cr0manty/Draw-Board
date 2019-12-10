@@ -21,18 +21,6 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('draw', data);
     });
 
-    socket.on('change_radius', function (data) {
-        socket.broadcast.emit('change_radius', data);
-    });
-
-    socket.on('change_brush_color', function (data) {
-        socket.broadcast.emit('change_brush_color', data);
-    });
-
-    socket.on('join', function () {
-        socket.broadcast.emit('join');
-    });
-
     socket.on('clear', function () {
         socket.broadcast.emit('clear');
     });
