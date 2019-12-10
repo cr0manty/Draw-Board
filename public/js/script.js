@@ -49,8 +49,11 @@ $(document).ready(function () {
     socket.on('connect', function () {
         brush_color = '#000000';
         radius = 10;
+
         $('#radius').val(radius);
         $('#brush_color').val(brush_color);
+
+        console.log('User connected!');
     });
 
     socket.on('draw', function (data) {
