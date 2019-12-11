@@ -10,6 +10,7 @@ $(document).ready(function () {
 
     canvas.addEventListener('mousedown', function () {
         drawing = true;
+        socket.emit('mouse_down');
     });
 
     canvas.addEventListener('mouseup', function () {
