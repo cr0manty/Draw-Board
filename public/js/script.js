@@ -20,8 +20,8 @@ $(document).ready(function () {
     });
 
     canvas.addEventListener('mousemove', function (e) {
-        const x = e.clientX - 24;
-        const y = e.clientY - 24;
+        const x = e.clientX - 24 + window.scrollX;
+        const y = e.clientY - 24 + window.scrollY;
 
         if (drawing) {
             socket.emit('draw', {
